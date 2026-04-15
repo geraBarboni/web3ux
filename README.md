@@ -15,7 +15,7 @@ Web3 products fail on UX — not technology. This pack gives Claude deep domain 
       ↓              [checkpoint: validate personas and priorities]
 /web3-flow       →  user flows + task flows in Mermaid + decision points
       ↓              [checkpoint: resolve decision points]
-/web3-wireframe  →  low-fi wireframes in Figma (requires Figma MCP)
+/web3-wireframe  →  low-fi wireframes in Figma or Stitch (Figma MCP or Google Stitch MCP)
 ```
 
 Each step feeds the next. You can enter the pipeline at any point if you already have something built.
@@ -28,7 +28,7 @@ Each step feeds the next. You can enter the pipeline at any point if you already
 | `web3-brief` | Full research output: personas, pain points, competitive analysis, strategic decisions |
 | `web3-flow` | Mermaid user flows and task flows with Web3-specific states and decision points |
 | `web3-critique` | Heuristic audit of existing flows or UI against Web3 UX rules |
-| `web3-wireframe` | Low-fi wireframes in Figma based on flows |
+| `web3-wireframe` | Low-fi wireframes in Figma (full quality) or Google Stitch (free, MVP). Auto-detects available tool. |
 
 ## Installation
 
