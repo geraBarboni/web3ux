@@ -29,7 +29,7 @@ Determine which output path to use before doing anything else.
 
 **If an explicit parameter was passed:**
 
-- `figma` → verify Figma MCP is available by attempting to call a Figma tool. If unavailable:
+- `figma` → verify Figma MCP is available by calling `figma_get_me` or any read-only Figma tool. If unavailable:
   > **Figma MCP not detected.**
   >
   > To use the Figma path, install the Figma MCP for Claude Code:
@@ -37,7 +37,7 @@ Determine which output path to use before doing anything else.
   > 2. Add your Figma access token to Claude Code settings
   > 3. Re-run `/web3-wireframe figma`
 
-- `stitch` → verify Stitch MCP is available by attempting to call a Stitch tool. If unavailable:
+- `stitch` → verify Stitch MCP is available by calling `list_projects` or any read-only Stitch tool. If unavailable:
   > **Google Stitch MCP not detected.**
   >
   > To use the Stitch path, add the Stitch MCP to your Claude Code settings:
@@ -56,8 +56,8 @@ Determine which output path to use before doing anything else.
 
 **If no parameter was passed (auto-detect):**
 
-1. Attempt to call a Figma MCP tool. If it succeeds → use **Path: Figma**.
-2. If Figma fails, attempt to call a Stitch MCP tool. If it succeeds → use **Path: Stitch**.
+1. Call `figma_get_me` or any read-only Figma tool. If it succeeds → use **Path: Figma**.
+2. If Figma fails, call `list_projects` or any read-only Stitch tool. If it succeeds → use **Path: Stitch**.
 3. If both fail:
   > **No wireframe tool detected.**
   >
@@ -91,6 +91,8 @@ Read `web3-flow.md` from the current directory.
 If not found:
 > I need flows before generating wireframes. Run `/web3-flow` first.
 
+Also read `web3-brief.md` if it exists — it provides product name, personas, and copy used in wireframe content. If not found, note that wireframe content will use placeholders and ask the user to confirm before proceeding.
+
 ---
 
 ## Step 3 — Identify screens
@@ -115,13 +117,17 @@ Present the list to the user:
 >
 > Should I generate all of them, or prioritize a subset for the first version?
 
+Wait for the user's response. Proceed with only the screens the user confirms.
+
 ---
 
 ## Path: Figma
 
 ### Step 4F — Ask for Figma file
 
-> Paste your Figma file URL, or I'll create a new file named "web3ux — [Product Name] — Wireframes."
+> Do you have an existing Figma file you want to use? Paste the URL, or I'll create a new file named "web3ux — [Product Name] — Wireframes."
+
+(Use the product name from `web3-brief.md`, or ask the user if brief is unavailable.)
 
 If the user provides a URL, open that file.
 If not, create a new Figma file.
@@ -152,7 +158,7 @@ After all frames are created, add prototype links following the flow logic from 
 
 ### Step 7F — Checkpoint
 
-> ✓ **[N] wireframes generated in Figma.**
+> **[N] wireframes generated in Figma.**
 >
 > Link: [Figma file URL]
 >
@@ -172,6 +178,8 @@ After all frames are created, add prototype links following the flow logic from 
 ### Step 4S — Project setup
 
 > Do you have an existing Stitch project you want to use? Paste the URL, or I'll create a new project named "web3ux — [Product Name] — Wireframes."
+
+(Use the product name from `web3-brief.md`, or ask the user if brief is unavailable.)
 
 ### Step 5S — Generate screens
 
@@ -205,7 +213,7 @@ If a screen looks wrong, regenerate it with a more specific prompt.
 
 ### Step 7S — Checkpoint
 
-> ✓ **[N] screens generated in Stitch.**
+> **[N] screens generated in Stitch.**
 >
 > Project: [Stitch project URL]
 >
